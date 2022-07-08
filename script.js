@@ -1,12 +1,12 @@
 (() => {
-    const inputTextEl = document.querySelector('#text');
-    const btnEl = document.querySelector('.btn');
+    const inputValueEl = document.querySelector('#user__value');
+    const btnAddItemEl = document.querySelector('#add__item');
     const listEl = document.querySelector('.list');
-    const btnCheckAll = document.querySelector('#checkAll');
-    const btnDeleteAll = document.querySelector('#deleteAll');
+    const btnCheckAllEl = document.querySelector('#check__all');
+    const btnDeleteAllEl = document.querySelector('#delete__all');
 
-    function addToDoList(){
-        let userValue = inputTextEl.value.trim();
+    function onAddToDoList(){
+        let userValue = inputValueEl.value.trim();
         
         if (userValue !== '') {
             const newElLi = document.createElement('li');
@@ -21,9 +21,9 @@
             listEl.append(newElLi);
             newElLi.append(newElInputInLi, newBtnDelLi);
 
-            inputTextEl.value = ''; 
+            inputValueEl.value = ''; 
 
-            function addStyleLineThrough(){  
+            function onAddStyleLineThrough(){  
                 if (!newElInputInLi.checked) {
                     newElLi.classList.remove('line__through');               
                 } else {
@@ -31,7 +31,7 @@
                 }
             }
 
-            function addCheckAll(){
+            function onCheckAll(){
                 const allInput = document.querySelectorAll('input');
         
                 Array.from(allInput).forEach(e => {                    
@@ -39,23 +39,23 @@
                 });    
             }
           
-            btnCheckAll.addEventListener('click', addCheckAll);
-            btnCheckAll.addEventListener('click', addStyleLineThrough);
+            btnCheckAllEl.addEventListener('click', onCheckAll);
+            btnCheckAllEl.addEventListener('click', onAddStyleLineThrough);
 
-            newElInputInLi.addEventListener('click', addStyleLineThrough);             
+            newElInputInLi.addEventListener('click', onAddStyleLineThrough);             
 
             newBtnDelLi.addEventListener('click', () => newElLi.remove()); 
 
-            btnDeleteAll.addEventListener('click', () => newElLi.remove());
+            btnDeleteAllEl.addEventListener('click', () => newElLi.remove());
         } else {
             alert('There is nothing to add!');
         }   
     }
 
-    btnEl.addEventListener('click', addToDoList);
+    btnAddItemEl.addEventListener('click', onAddToDoList);
 
-    inputTextEl.addEventListener('keydown', e => {
-        if (e.code === 'Enter') addToDoList();        
+    inputValueEl.addEventListener('keydown', e => {
+        if (e.code === 'Enter') onAddToDoList();        
     });
 
 })();
